@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_26_185005) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_26_194356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "genres", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_genres_on_name", unique: true
+  end
+
+  create_table "genres_movies", id: false, force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "genre_id", null: false
+    t.index ["movie_id", "genre_id"], name: "index_genres_movies_on_movie_id_and_genre_id", unique: true
+  end
 
   create_table "movies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
