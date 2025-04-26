@@ -1,0 +1,2 @@
+- always generate code with lf as end-of-line
+- the database use uuid as the id type
