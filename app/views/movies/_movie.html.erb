@@ -14,4 +14,13 @@
     <%= movie.poster_image_url %>
   </p>
 
+  <p>
+    <strong>Gêneros:</strong>
+    <% if movie.genres.any? %>
+      <%= movie.genres.map(&:name).join(", ") %>
+    <% else %>
+      <span class="text-gray-500">Nenhum gênero associado</span>
+    <% end %>
+  </p>
+
 </div>

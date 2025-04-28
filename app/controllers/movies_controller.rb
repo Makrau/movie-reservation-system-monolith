@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
+  before_action :set_genres, only: %i[ new edit create update ]
 
   # GET /movies or /movies.json
   def index
@@ -63,8 +64,12 @@ class MoviesController < ApplicationController
       @movie = Movie.find(params.expect(:id))
     end
 
+    def set_genres
+      @genres = Genre.all
+    end
+
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.expect(movie: [ :title, :description, :poster_image_url ])
+      params.require(:movie).permit(:title, :description, :poster_image_url, genre_ids: [])
     end
 end

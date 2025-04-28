@@ -23,8 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_194356) do
   end
 
   create_table "genres_movies", id: false, force: :cascade do |t|
-    t.bigint "movie_id", null: false
-    t.bigint "genre_id", null: false
+    t.uuid "movie_id", null: false
+    t.uuid "genre_id", null: false
     t.index ["movie_id", "genre_id"], name: "index_genres_movies_on_movie_id_and_genre_id", unique: true
   end
 
