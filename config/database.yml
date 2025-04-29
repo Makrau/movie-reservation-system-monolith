@@ -21,10 +21,15 @@ default: &default
 
 
 development:
-  <<: *default
-  database: movie_reservation_system_monolith_development
-  username: <%= ENV['MRS_DATABASE_USERNAME' ] %>
-  password: <%= ENV['MRS_DATABASE_PASSWORD'] %>
+  primary:  &primary_development
+    <<: *default
+    database: movie_reservation_system_monolith_development
+    username: <%= ENV['MRS_DATABASE_USERNAME' ] %>
+    password: <%= ENV['MRS_DATABASE_PASSWORD'] %>
+  cable:
+    <<: *primary_development
+    database: movie_reservation_system_monolith_development_cable
+    migrations_paths: db/cable_migrate
 
 test:
   <<: *default

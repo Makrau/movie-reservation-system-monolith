@@ -3,13 +3,16 @@
 <% content_for :title, "Movies" %>
 
 <h1>Movies</h1>
+<%= turbo_stream_from "movies" %>
 
 <div id="movies">
   <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
+    <%= turbo_frame_tag dom_id(movie) do %>
+      <%= render movie %>
+      <p>
+        <%= link_to "Show this movie", movie %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 

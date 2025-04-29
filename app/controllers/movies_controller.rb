@@ -26,6 +26,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
+        format.turbo_stream
         format.html { redirect_to @movie, notice: "Movie was successfully created." }
         format.json { render :show, status: :created, location: @movie }
       else
